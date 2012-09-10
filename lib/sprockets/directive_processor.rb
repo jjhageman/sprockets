@@ -74,7 +74,8 @@ module Sprockets
     def prepare
       @pathname = Pathname.new(file)
 
-      @header = data[HEADER_PATTERN, 0] || ""
+      m = HEADER_PATTERN.match(data)
+      @header = m[0] || ""
       @body   = $' || data
       # Ensure body ends in a new line
       @body  += "\n" if @body != "" && @body !~ /\n\Z/m
